@@ -7,5 +7,5 @@ import "./index.css"; // Import styles
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
 
-// Render App component inside root
-createRoot(rootElement).render(<App />);
+// Convert JSX <App /> to pure JavaScript using React.createElement
+createRoot(rootElement).render(React.createElement(App, null));
