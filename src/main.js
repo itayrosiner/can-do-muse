@@ -1,4 +1,6 @@
 import { createRoot } from "react-dom/client";
+import { createRoot } from "https://esm.sh/react-dom/client";
+import { createRoot } from "./node_modules/react-dom/client"; 
 import App from "./App.js"; // Ensure App.js exports a valid React component
 import "./index.css";
 
