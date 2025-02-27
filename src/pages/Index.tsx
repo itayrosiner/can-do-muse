@@ -6,43 +6,260 @@ import BeachCard from '@/components/BeachCard';
 import FilterPopup from '@/components/FilterPopup';
 import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
+import { Beach } from '@/types/beach';
 
-// Sample data - in a real app this would come from an API
-const beachesData = [
+// Sample data - from the user's provided database
+const beachesData: Beach[] = [
   {
-    id: '1',
-    name: 'חוף בוגרשוב',
-    location: 'תל אביב - יפו',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=1000',
+    "beach_name": "Gordon Beach",
+    "city": "Tel Aviv",
+    "Shadow": "Full",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "Center",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0806, "longitude": 34.7725 }
   },
   {
-    id: '2',
-    name: 'חוף גורדון',
-    location: 'תל אביב - יפו',
-    imageUrl: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&q=80&w=1000',
+    "beach_name": "Frishman Beach",
+    "city": "Tel Aviv",
+    "Shadow": "Partial",
+    "accessibility_parking": false,
+    "Access_road_to_beach": false,
+    "Distance_parking_to_beach": 200,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0800, "longitude": 34.7700 }
   },
   {
-    id: '3',
-    name: 'חוף הכרמל',
-    location: 'חיפה',
-    imageUrl: 'https://images.unsplash.com/photo-1591017403286-fd8493524e1e?auto=format&fit=crop&q=80&w=1000',
+    "beach_name": "Hilton Beach",
+    "city": "Tel Aviv",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 150,
+    "beach_accessible_chairs": 3,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0760, "longitude": 34.7770 }
   },
   {
-    id: '4',
-    name: 'חוף אכזיב',
-    location: 'נהריה',
-    imageUrl: 'https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?auto=format&fit=crop&q=80&w=1000',
+    "beach_name": "Banana Beach",
+    "city": "Tel Aviv",
+    "Shadow": "Full",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "Center",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 32.0768, "longitude": 34.7799 }
   },
   {
-    id: '5',
-    name: 'חוף פלמחים',
-    location: 'רחובות',
-    imageUrl: 'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&q=80&w=1000',
+    "beach_name": "Metzitzim Beach",
+    "city": "Tel Aviv",
+    "Shadow": "Partial",
+    "accessibility_parking": true,
+    "Access_road_to_beach": false,
+    "Distance_parking_to_beach": 300,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 32.0782, "longitude": 34.7733 }
   },
+  {
+    "beach_name": "Alma Beach",
+    "city": "Tel Aviv",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0750, "longitude": 34.7760 }
+  },
+  {
+    "beach_name": "Herzliya Beach",
+    "city": "Herzliya",
+    "Shadow": "Full",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "Center",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.1650, "longitude": 34.8320 }
+  },
+  {
+    "beach_name": "Tel Baruch Beach",
+    "city": "Tel Aviv",
+    "Shadow": "Partial",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 200,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0920, "longitude": 34.7870 }
+  },
+  {
+    "beach_name": "Jaffa Beach",
+    "city": "Tel Aviv-Yafo",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 150,
+    "beach_accessible_chairs": 3,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0540, "longitude": 34.7500 }
+  },
+  {
+    "beach_name": "Hof HaCarmel Beach",
+    "city": "Haifa",
+    "Shadow": "Full",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "Center",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 32.8222, "longitude": 34.9899 }
+  },
+  {
+    "beach_name": "Bat Galim Beach",
+    "city": "Haifa",
+    "Shadow": "Partial",
+    "accessibility_parking": true,
+    "Access_road_to_beach": false,
+    "Distance_parking_to_beach": 300,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.8150, "longitude": 34.9870 }
+  },
+  {
+    "beach_name": "Coral Beach",
+    "city": "Eilat",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 29.5581, "longitude": 34.9482 }
+  },
+  {
+    "beach_name": "Dolphin Reef Beach",
+    "city": "Eilat",
+    "Shadow": "Full",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 200,
+    "beach_accessible_chairs": 1,
+    "israel_region": "Center",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 29.5450, "longitude": 34.9480 }
+  },
+  {
+    "beach_name": "Red Sea Beach",
+    "city": "Eilat",
+    "Shadow": "Partial",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 150,
+    "beach_accessible_chairs": 3,
+    "israel_region": "North",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 29.5500, "longitude": 34.9510 }
+  },
+  {
+    "beach_name": "Ashkelon Beach",
+    "city": "Ashkelon",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 31.6700, "longitude": 34.5750 }
+  },
+  {
+    "beach_name": "Ashdod Beach",
+    "city": "Ashdod",
+    "Shadow": "Full",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 200,
+    "beach_accessible_chairs": 1,
+    "israel_region": "Center",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 31.8000, "longitude": 34.6500 }
+  },
+  {
+    "beach_name": "Caesarea Beach",
+    "city": "Caesarea",
+    "Shadow": "Partial",
+    "accessibility_parking": true,
+    "Access_road_to_beach": false,
+    "Distance_parking_to_beach": 300,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 32.5000, "longitude": 34.9000 }
+  },
+  {
+    "beach_name": "Netanya Beach",
+    "city": "Netanya",
+    "Shadow": "None",
+    "accessibility_parking": true,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 100,
+    "beach_accessible_chairs": 2,
+    "israel_region": "South",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.3300, "longitude": 34.8500 }
+  },
+  {
+    "beach_name": "Rishon LeZion Beach",
+    "city": "Rishon LeZion",
+    "Shadow": "Full",
+    "accessibility_parking": false,
+    "Access_road_to_beach": true,
+    "Distance_parking_to_beach": 200,
+    "beach_accessible_chairs": 1,
+    "israel_region": "Center",
+    "wheelchair_accessible": true,
+    "location": { "latitude": 32.0560, "longitude": 34.7720 }
+  },
+  {
+    "beach_name": "Herzliya Marina Beach",
+    "city": "Herzliya",
+    "Shadow": "Partial",
+    "accessibility_parking": true,
+    "Access_road_to_beach": false,
+    "Distance_parking_to_beach": 300,
+    "beach_accessible_chairs": 1,
+    "israel_region": "North",
+    "wheelchair_accessible": false,
+    "location": { "latitude": 32.1655, "longitude": 34.8350 }
+  }
 ];
 
+// Assign IDs to beaches
+const beachesWithId = beachesData.map((beach, index) => ({
+  ...beach,
+  id: (index + 1).toString()
+}));
+
 const HomePage: React.FC = () => {
-  const [beaches, setBeaches] = useState(beachesData);
+  const [beaches, setBeaches] = useState(beachesWithId);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(true);
@@ -59,12 +276,12 @@ const HomePage: React.FC = () => {
 
   const handleSearch = (query: string) => {
     if (!query.trim()) {
-      setBeaches(beachesData);
+      setBeaches(beachesWithId);
       return;
     }
 
-    const filtered = beachesData.filter(
-      beach => beach.name.includes(query) || beach.location.includes(query)
+    const filtered = beachesWithId.filter(
+      beach => beach.beach_name.includes(query) || beach.city.includes(query)
     );
     
     setBeaches(filtered);
@@ -80,8 +297,40 @@ const HomePage: React.FC = () => {
   const handleFilterApply = (filters: Record<string, string[]>) => {
     setSelectedFilters(filters);
     
-    // In a real app, you would filter based on the selected options
-    // For demo purposes, we'll just show a toast
+    // Filter beaches based on selected options
+    let filteredBeaches = [...beachesWithId];
+    
+    // Apply accessibility filters
+    if (filters.accessibility && filters.accessibility.length > 0) {
+      if (filters.accessibility.includes('wheelchair')) {
+        filteredBeaches = filteredBeaches.filter(beach => beach.wheelchair_accessible);
+      }
+      
+      if (filters.accessibility.includes('parking')) {
+        filteredBeaches = filteredBeaches.filter(beach => beach.accessibility_parking);
+      }
+      
+      if (filters.accessibility.includes('road')) {
+        filteredBeaches = filteredBeaches.filter(beach => beach.Access_road_to_beach);
+      }
+    }
+    
+    // Apply region filters
+    if (filters.region && filters.region.length > 0) {
+      filteredBeaches = filteredBeaches.filter(beach => 
+        filters.region.includes(beach.israel_region.toLowerCase())
+      );
+    }
+    
+    // Apply shadow filters
+    if (filters.shadow && filters.shadow.length > 0) {
+      filteredBeaches = filteredBeaches.filter(beach => 
+        filters.shadow.includes(beach.Shadow.toLowerCase())
+      );
+    }
+    
+    setBeaches(filteredBeaches);
+    
     const hasFilters = Object.values(filters).some(arr => arr.length > 0);
     
     if (hasFilters) {
@@ -89,6 +338,8 @@ const HomePage: React.FC = () => {
         title: "הפילטרים הוחלו בהצלחה",
         description: "מציג חופים מסוננים",
       });
+    } else {
+      setBeaches(beachesWithId);
     }
   };
 
@@ -120,9 +371,9 @@ const HomePage: React.FC = () => {
                 <BeachCard
                   key={beach.id}
                   id={beach.id}
-                  name={beach.name}
-                  location={beach.location}
-                  imageUrl={beach.imageUrl}
+                  name={beach.beach_name}
+                  location={beach.city}
+                  imageUrl={`https://source.unsplash.com/featured/?beach,${beach.beach_name.replace(' ', '')}`}
                 />
               ))}
             </div>

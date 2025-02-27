@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import { X, Wheelchair, Car, Road, SunSnow, MapPin } from 'lucide-react';
 
 interface FilterOption {
   id: string;
@@ -21,38 +21,35 @@ interface FilterPopupProps {
 }
 
 const FilterPopup: React.FC<FilterPopupProps> = ({ isOpen, onClose, onApply }) => {
-  const [activeTab, setActiveTab] = useState('facilities');
+  const [activeTab, setActiveTab] = useState('accessibility');
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
   const categories: FilterCategory[] = [
     {
-      id: 'facilities',
-      label: 'מתקנים',
+      id: 'accessibility',
+      label: 'נגישות',
       options: [
-        { id: 'accessibility', label: 'נגישות לנכים', icon: <span className="text-xl">♿</span> },
-        { id: 'lifeguard', label: 'הצלה', icon: <span className="text-xl">🛟</span> },
-        { id: 'shade', label: 'צל', icon: <span className="text-xl">🏝️</span> },
-        { id: 'parking', label: 'חניון', icon: <span className="text-xl">🅿️</span> }
+        { id: 'wheelchair', label: 'נגיש לכיסאות גלגלים', icon: <Wheelchair size={20} /> },
+        { id: 'parking', label: 'חניית נכים', icon: <Car size={20} /> },
+        { id: 'road', label: 'דרך גישה לחוף', icon: <Road size={20} /> }
       ]
     },
     {
-      id: 'amenities',
-      label: 'שירותים',
+      id: 'shadow',
+      label: 'צל',
       options: [
-        { id: 'changing_rooms', label: 'תאי הלבשה', icon: <span className="text-xl">👙</span> },
-        { id: 'food', label: 'מזון', icon: <span className="text-xl">🍽️</span> },
-        { id: 'cleanliness', label: 'ניקיון', icon: <span className="text-xl">✨</span> },
-        { id: 'restrooms', label: 'שירותים', icon: <span className="text-xl">🚻</span> }
+        { id: 'full', label: 'צל מלא', icon: <span className="text-xl">☂️</span> },
+        { id: 'partial', label: 'צל חלקי', icon: <span className="text-xl">🌤️</span> },
+        { id: 'none', label: 'ללא צל', icon: <span className="text-xl">☀️</span> }
       ]
     },
     {
-      id: 'activities',
-      label: 'פעילויות',
+      id: 'region',
+      label: 'אזור',
       options: [
-        { id: 'surfing', label: 'גלישה', icon: <span className="text-xl">🏄‍♂️</span> },
-        { id: 'swimming', label: 'שחייה', icon: <span className="text-xl">🏊‍♂️</span> },
-        { id: 'volleyball', label: 'כדורעף', icon: <span className="text-xl">🏐</span> },
-        { id: 'pets', label: 'חיות מחמד', icon: <span className="text-xl">🐕</span> }
+        { id: 'north', label: 'צפון', icon: <MapPin size={20} /> },
+        { id: 'center', label: 'מרכז', icon: <MapPin size={20} /> },
+        { id: 'south', label: 'דרום', icon: <MapPin size={20} /> }
       ]
     }
   ];
